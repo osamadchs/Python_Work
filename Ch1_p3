@@ -1,0 +1,22 @@
+import os
+
+def print_directory_contents(path="."):
+    """Print the contents of a directory."""
+    try:
+        contents = os.listdir(path)
+        if not contents:
+            print(f"The directory '{path}' is empty.")
+        else:
+            print(f"Contents of '{path}':")
+            for item in contents:
+                full_path = os.path.join(path, item)
+                item_type = "DIR " if os.path.isdir(full_path) else "FILE"
+                print(f"  [{item_type}] {item}")
+    except FileNotFoundError:
+        print(f"Error: Directory '{path}' not found.")
+    except PermissionError:
+        print(f"Error: Permission denied for '{path}'.")
+
+if __name__ == "__main__":
+    # Change "." to any directory path you want to list
+    print_directory_contents(".")
